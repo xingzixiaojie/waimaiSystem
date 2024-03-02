@@ -2,8 +2,9 @@ dependencies {
     //spring-boot
     compile "org.springframework.boot:spring-boot-starter:2.1.4.RELEASE"
     compile "org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE"
+
     //spring-boot-security
-    compile "org.springframework.boot:spring-boot-starter-security:2.1.4.RELEASE"
+//    compile "org.springframework.boot:spring-boot-starter-security:2.1.4.RELEASE"
 
     //mybatis
     compile "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1"
@@ -12,7 +13,7 @@ dependencies {
     //数据库连接池
     compile "com.alibaba:druid:1.1.10"
     compile "mysql:mysql-connector-java:5.1.47"
-    compile "com.alibaba:druid-spring-boot-starter:1.1.10"
+    compile "com.alibaba:druid-spring-boot-starter:1.2.5"
 
     //log4jdbc
     compile "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16"

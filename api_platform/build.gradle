@@ -11,7 +11,10 @@ dependencies {
     //spring-boot
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-actuator"
-    compile "org.springframework.boot:spring-boot-starter-security"
+
+    //spring-boot-security
+    //compile "org.springframework.boot:spring-boot-starter-security"
+
     //开发工具
     runtimeOnly "org.springframework.boot:spring-boot-devtools"
     testImplementation "org.springframework.boot:spring-boot-starter-test"

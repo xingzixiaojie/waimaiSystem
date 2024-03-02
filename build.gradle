@@ -12,8 +12,33 @@ subprojects {
         mavenCentral()
     }
 
-    dependencies {
+    ext {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        [compileJava, compileTestJava, javadoc]*.options*.encoding = "UTF-8"
+    }
+
+    idea {
+        module {
+            downloadSources = true
+            outputDir = file("build/classes/java/main")
+            testOutputDir = file("build/classes/java/test")
+        }
+    }
+
+    configurations {
+        optional
+        compile.extendsFrom optional
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies{
         compileOnly "org.projectlombok:lombok:1.18.6"
         annotationProcessor "org.projectlombok:lombok:1.18.6"
     }
+
 }
+
