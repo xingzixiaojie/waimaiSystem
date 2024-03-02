@@ -1,0 +1,9 @@
+#允许java bean 覆盖
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+#mapper扫描
+mybatis:
+  type-aliases-package: com.chen.*.mapper.*Mapper
+  mapper-locations: classpath*:mapper/**/*.xml
