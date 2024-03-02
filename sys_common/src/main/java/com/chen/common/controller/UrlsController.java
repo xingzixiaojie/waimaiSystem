@@ -1,9 +1,6 @@
 package com.chen.common.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xld.common.result.ResultBO;
-import com.xld.common.result.ResultStatusEnum;
-import com.xld.common.result.Results;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiSort;

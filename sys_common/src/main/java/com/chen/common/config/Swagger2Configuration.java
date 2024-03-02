@@ -1,7 +1,7 @@
 package com.chen.common.config;
 
+import com.chen.common.result.ResultStatusEnum;
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
-import com.xld.common.result.ResultStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
