@@ -14,12 +14,10 @@ public enum ResultStatusEnum implements ResultStatusHandler {
     FAIL(201, "操作失败"),
 
     //业务级 区间 300~399
-    SESSION_ERROR(300, "登录Session过期"),
-    PARAM_ERROR(301, "参数错误"),
-    BUSINESS_ERROR(302, "业务错误");
+    TOKEN_ERROR(300, "登录token过期"),
+    PARAM_ERROR(301, "参数错误");
 
     //业务自定义 区间 400~499
-    //业务特殊处理 区间 500~599
 
     private final Integer code;
     private final String message;

@@ -9,6 +9,7 @@ spring:
     url: jdbc:mysql://localhost:3306/waimai_system?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowMultiQueries=true
     username: root
     password: java
+    type: com.alibaba.druid.pool.DruidDataSource
 
     #druid 配置
     druid:
@@ -55,9 +56,12 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB  #需大于等于最大文件尺寸
 
-#自定义
-myself:
-  swagger2:
-    title:  通用外卖系统
-  #url根路径
-  url-root: http://127.0.0.1:8080/
+#swagger2是否开启
+swagger:
+  enable: true  #生产环境要关闭
+
+#PageHelper的配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  default-count: true

@@ -8,24 +8,27 @@ dependencies {
 
     //mybatis
     compile "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0"
-    compile "org.springframework.boot:spring-boot-starter-jdbc:2.7.3"
+
 
     //数据库连接池
     compile "com.alibaba:druid:1.2.1"
-    compile "mysql:mysql-connector-java:5.1.47"
+    compile "mysql:mysql-connector-java:8.0.33"
+    compile "org.springframework.boot:spring-boot-starter-jdbc:2.7.14"
     compile "com.alibaba:druid-spring-boot-starter:1.2.1"
 
     //log4jdbc
-    compile "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16"
+    compile "log4j:log4j:1.2.17"
+    compile "org.apache.logging.log4j:log4j-to-slf4j:2.17.2"
+    compile "org.apache.logging.log4j:log4j-api:2.17.2"
 
     //Api文档
     compile ("io.springfox:springfox-swagger2:2.9.2"){
         exclude group: "io.swagger:swagger-annotations"
         exclude group: "io.swagger:swagger-models"
     }
-    compile "io.swagger:swagger-annotations:1.5.21"
+    compile "io.swagger:swagger-annotations:1.6.2"
     compile "io.swagger:swagger-models:1.5.21"
-    compile "com.github.xiaoymin:swagger-bootstrap-ui:1.9.2"
+    compile "com.github.xiaoymin:swagger-bootstrap-ui:1.9.6"
 
     //JSON
     compile "com.alibaba:fastjson:1.2.76"
@@ -35,9 +38,6 @@ dependencies {
 
     //com.aliyun.oss
     compile "com.aliyun.oss:aliyun-sdk-oss:3.10.2"
-
-    //knife4j
-    compile "com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2"
 
     //jjwt,Token生成
     compile "io.jsonwebtoken:jjwt:0.9.1"
@@ -54,12 +54,12 @@ dependencies {
 
     //apache.commons
     compile "org.apache.commons:commons-io:1.3.2"
-    compile "org.apache.commons:commons-lang3:3.5"
+    compile "org.apache.commons:commons-lang3:3.7"
     //CloseableHttpClient http访问
-    compile "org.apache.httpcomponents:httpclient:4.5.2"
+    compile "org.apache.httpcomponents:httpclient:4.5.6"
 
     //集合工具
-    compile "cn.hutool:hutool-all:4.5.10"
+    compile "cn.hutool:hutool-all:5.8.20"
 
     //数据库分页工具
     compile "com.github.pagehelper:pagehelper-spring-boot-starter:1.3.0"
