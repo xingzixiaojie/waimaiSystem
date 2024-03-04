@@ -31,4 +31,5 @@ public class SpringUtil implements ApplicationContextAware {
     public static <T> T getBean(String name, Class<T> requiredType) throws BeansException {
         return context != null ? context.getBean(name, requiredType) : null;
     }
+
 }

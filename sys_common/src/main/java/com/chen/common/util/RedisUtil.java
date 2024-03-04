@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 通过键删除一个值
@@ -49,6 +49,15 @@ public class RedisUtil {
      */
     public Object get(String key) {
         return redisTemplate.boundValueOps(key).get();
+    }
+
+    /**
+     * 设置键的过期时间
+     * @param key 键
+     * @param expireTime 过期时间，单位：秒
+     */
+    public void expire(String key, Long expireTime){
+        redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
     }
 
 }

@@ -20,7 +20,7 @@ public class NoUtil implements Serializable {
             return null;
         }
 
-        String dateStr = DateUtil.timeToStr(DateUtil.getCurTime().getTime(), "yyMMdd");
+        String dateStr = DateUtil.timeToStr(DateUtil.getCurTime(), "yyMMdd");
         String orderNo = orderNoPrefix + dateStr + createDigitCode(12);
         return orderNo;
     }
