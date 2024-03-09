@@ -19,7 +19,6 @@ public class SpringMVCConfiguration implements WebMvcConfigurer {
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
 
-        resolvers.add(new OverallExceptionResolver());
     }
 
     @Override

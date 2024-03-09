@@ -1,5 +1,6 @@
 package com.chen;
 
+import com.chen.common.utils.LogUtil;
 import com.chen.interceptor.JwtTokenAdminInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,14 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @EnableWebMvc  //springMVC
 @Configuration  //启用配置模式
 @EnableScheduling  //定时任务
 @MapperScan("com.chen.core.*.mapper")  //扫描mapper文件包
 @SpringBootApplication(scanBasePackages = {"com.chen"})
-public class Platform {
+public class Platform  extends WebMvcConfigurationSupport {
 
     public static void main(String[] args) {
         SpringApplication.run(Platform.class, args);
@@ -35,6 +37,7 @@ public class Platform {
      * @param registry 拦截器注册器
      */
     protected void addInterceptors(InterceptorRegistry registry) {
+        LogUtil.printInfo("开始注册自定义拦截器...");
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
