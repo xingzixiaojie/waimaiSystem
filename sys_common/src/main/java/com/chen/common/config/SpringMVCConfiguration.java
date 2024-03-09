@@ -18,8 +18,8 @@ public class SpringMVCConfiguration implements WebMvcConfigurer {
 
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-        // TODO 屏蔽springsecurity影响
-//        resolvers.add(new OverallExceptionResolver());
+
+        resolvers.add(new OverallExceptionResolver());
     }
 
     @Override
