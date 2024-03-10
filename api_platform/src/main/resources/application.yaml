@@ -45,16 +45,16 @@ spring:
         # 链接超时时间（毫秒）
         timeout: 36000
 
-  #其他相关配置文件
-  profiles:
-    active: common #引用sys_common下的yaml文件
-
   # 上传文件大小限制
   servlet:
     multipart:
       enabled: true
       max-file-size: 100MB
       max-request-size: 100MB  #需大于等于最大文件尺寸
+
+  main:
+    allow-circular-references: true  #spring boot 2.6及以上版本要开启循环依赖
+    allow-bean-definition-overriding: true #允许java bean 覆盖
 
 #swagger2是否开启
 swagger:
@@ -65,3 +65,10 @@ pagehelper:
   helper-dialect: mysql
   reasonable: false
   default-count: true
+
+#mapper扫描
+mybatis:
+  type-aliases-package: com.chen.*.mapper.*Mapper
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true  # 开启驼峰映射

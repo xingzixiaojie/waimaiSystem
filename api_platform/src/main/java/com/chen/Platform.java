@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration  //启用配置模式
 @EnableScheduling  //定时任务
 @EnableTransactionManagement //开启注解方式的事务管理
-@MapperScan("com.chen.core.*.mapper")  //扫描mapper文件包
+@MapperScan("com.chen.core.*.mapper")  //扫描mapper
 @SpringBootApplication(scanBasePackages = {"com.chen"})
 public class Platform  extends WebMvcConfigurationSupport {
 
