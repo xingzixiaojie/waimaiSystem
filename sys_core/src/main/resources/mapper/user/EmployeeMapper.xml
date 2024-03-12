@@ -13,4 +13,12 @@
         WHERE username = #{username}
     </select>
 
+    <!--  新增员工信息  -->
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id" parameterType="com.chen.core.user.entity.EmployeeDO">
+        INSERT INTO employee (name, username, password, phone, sex, id_number, status,
+                              create_time, update_time, create_user, update_user)
+        VALUES (#{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{status}, #{createTime},
+                #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+
 </mapper>

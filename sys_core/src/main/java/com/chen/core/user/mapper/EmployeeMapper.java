@@ -17,4 +17,11 @@ public interface EmployeeMapper {
      */
     EmployeeDO getByUsername(@Param("username") String username);
 
+    /**
+     * 新增员工信息
+     * @param employeeDO 员工信息
+     * @return 影响条数
+     */
+    int insertEmployee(EmployeeDO employeeDO);
+
 }

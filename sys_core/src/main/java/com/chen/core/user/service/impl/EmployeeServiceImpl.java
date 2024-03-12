@@ -56,4 +56,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    /**
+     * 新增员工信息
+     * @param employeeDO 员工信息
+     * @return 操作成功：返回true，操作失败：返回false
+     */
+    @Override
+    public boolean insertEmployee(EmployeeDO employeeDO) {
+        return employeeMapper.insertEmployee(employeeDO) > 0;
+    }
+
+    /**
+     * 根据员工用户名查询员工信息
+     * @param username 员工用户名
+     * @return 员工信息
+     */
+    @Override
+    public EmployeeDO getByUsername(String username) {
+        EmployeeDO byUsername = employeeMapper.getByUsername(username);
+        return byUsername;
+    }
+
 }
