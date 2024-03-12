@@ -9,6 +9,7 @@ import com.chen.core.user.entity.EmployeeDO;
 import com.chen.core.user.mapper.EmployeeMapper;
 import com.chen.core.user.service.EmployeeService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 
@@ -40,8 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         //密码比对
-        // TODO 后期需要进行md5加密，然后再进行比对
-        if (!password.equals(employee.getPassword())) {
+        //MD5加密
+        String md5Password = DigestUtils.md5DigestAsHex(employeeDO.getPassword().getBytes());
+        if (!md5Password.equals(employee.getPassword())) {
             //密码错误
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
         }
@@ -51,7 +53,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new AccountLockedException(MessageConstant.ACCOUNT_LOCKED);
         }
 
-        //3、返回实体对象
         return employee;
     }
 

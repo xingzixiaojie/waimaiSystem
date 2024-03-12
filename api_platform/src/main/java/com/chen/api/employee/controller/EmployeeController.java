@@ -10,6 +10,8 @@ import com.chen.common.utils.JwtUtil;
 import com.chen.common.utils.LogUtil;
 import com.chen.core.user.entity.EmployeeDO;
 import com.chen.core.user.service.EmployeeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,7 @@ import java.util.Map;
 /**
  * 员工管理
  */
+@Api(tags = "1.1 员工接口")
 @RestController
 @RequestMapping("/admin/employee")
 public class EmployeeController {
@@ -39,6 +42,7 @@ public class EmployeeController {
      * @param employeeLoginPO 员工入参
      * @return 员工信息
      */
+    @ApiOperation(value = "员工登录")
     @PostMapping("/login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginPO employeeLoginPO) {
         LogUtil.printInfo("员工登录：{"+employeeLoginPO+"}");
