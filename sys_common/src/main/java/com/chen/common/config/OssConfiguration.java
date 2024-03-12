@@ -1,4 +1,4 @@
-package com.chen.config;
+package com.chen.common.config;
 
 import com.chen.common.properties.AliOssProperties;
 import com.chen.common.utils.AliOssUtil;

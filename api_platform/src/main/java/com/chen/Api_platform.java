@@ -15,10 +15,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @EnableTransactionManagement //开启注解方式的事务管理
 @MapperScan("com.chen.core.*.mapper")  //扫描mapper
 @SpringBootApplication(scanBasePackages = {"com.chen"})
-public class Platform  extends WebMvcConfigurationSupport {
+public class Api_platform extends WebMvcConfigurationSupport {
 
     public static void main(String[] args) {
-        SpringApplication.run(Platform.class, args);
+        SpringApplication.run(Api_platform.class, args);
     }
 
 }

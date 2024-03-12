@@ -1,7 +1,7 @@
-package com.chen.config;
+package com.chen.common.config;
 
+import com.chen.common.interceptor.JwtTokenAdminInterceptor;
 import com.chen.common.utils.LogUtil;
-import com.chen.interceptor.JwtTokenAdminInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

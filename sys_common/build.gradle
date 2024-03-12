@@ -6,6 +6,18 @@ dependencies {
     //mybatis
     compile "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0"
 
+    //redis相关配置
+    compile "org.springframework.boot:spring-boot-starter-data-redis:2.7.3"
+
+    //SpringBoot Cache
+    compile "org.springframework.boot:spring-boot-starter-cache:2.7.3"
+
+    //SpringBoot WebSocket
+    compile "org.springframework.boot:spring-boot-starter-websocket:2.7.3"
+
+    //SpringBoot Json
+    compile "org.springframework.boot:spring-boot-starter-json:2.7.3"
+
     //数据库连接池
     compile "com.alibaba:druid:1.2.1"
     compile "mysql:mysql-connector-java:8.0.33"

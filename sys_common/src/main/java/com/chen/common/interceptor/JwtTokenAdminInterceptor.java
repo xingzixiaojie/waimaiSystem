@@ -1,4 +1,4 @@
-package com.chen.interceptor;
+package com.chen.common.interceptor;
 
 
 import com.chen.common.constant.JwtClaimsConstant;

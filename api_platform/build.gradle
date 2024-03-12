@@ -12,18 +12,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-actuator"
 
-    //redis相关配置
-    compile "org.springframework.boot:spring-boot-starter-data-redis"
-
-    //SpringBoot Cache
-    compile "org.springframework.boot:spring-boot-starter-cache"
-
-    //SpringBoot WebSocket
-    compile "org.springframework.boot:spring-boot-starter-websocket"
-
-    //SpringBoot Json
-    compile "org.springframework.boot:spring-boot-starter-json"
-
     //开发工具
     runtimeOnly "org.springframework.boot:spring-boot-devtools"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
