@@ -42,7 +42,7 @@ public class EmployeeController {
      * @param employeeLoginPO 员工入参
      * @return 员工信息
      */
-    @ApiOperation(value = "员工登录")
+    @ApiOperation(value = "1.1.1 员工登录")
     @PostMapping("/login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginPO employeeLoginPO) {
         LogUtil.printInfo("员工登录：{"+employeeLoginPO+"}");
@@ -73,6 +73,7 @@ public class EmployeeController {
      *
      * @return 退出结果
      */
+    @ApiOperation(value = "1.1.2 员工退出")
     @PostMapping("/logout")
     public Result<String> logout() {
         return Result.success();

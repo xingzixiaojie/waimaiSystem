@@ -50,7 +50,7 @@ public class SpringMVCConfiguration extends WebMvcConfigurationSupport {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.chen.platform"))
+                .apis(RequestHandlerSelectors.basePackage("com.chen.api"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;
