@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.chen.api.employee.po.EmployeeCreatePO;
 import com.chen.api.employee.po.EmployeeLoginPO;
 import com.chen.api.employee.po.EmployeeQueryPO;
+import com.chen.api.employee.po.EmployeeUpdatePO;
 import com.chen.api.employee.vo.EmployeeLoginVO;
 import com.chen.api.employee.vo.EmployeePageResult;
 import com.chen.common.constant.JwtClaimsConstant;
@@ -90,15 +91,7 @@ public class EmployeeController {
         return Result.success(employeeLoginVO);
     }
 
-
-    @ApiOperation(value = "1.1.3 员工退出")
-    @PostMapping("/logout")
-    public Result<String> logout() {
-        return Result.success();
-    }
-
-
-    @ApiOperation(value = "1.1.4 添加员工")
+    @ApiOperation(value = "1.1.3 添加员工")
     @PostMapping
     public Result create(@RequestBody EmployeeCreatePO po){
 
@@ -114,6 +107,55 @@ public class EmployeeController {
         employeeDO.setCreateUser(BaseContext.getCurrentId());
         employeeDO.setUpdateUser(BaseContext.getCurrentId());
         boolean flag = employeeService.insertEmployee(employeeDO);
+        return Result.success();
+    }
+
+    @ApiOperation(value = "1.1.4 启用禁用员工账号")
+    @PostMapping("/status/{status}")
+    public Result updateEmployeeStatus(@PathVariable Integer status, Long id){
+        EmployeeDO employeeDO = employeeService.getById(id);
+        if (employeeDO == null){
+            return Result.error("员工账号不存在");
+        }
+
+        boolean flag = employeeService.updateStatus(id, status);
+        if (!flag){
+            return Result.error("操作失败！");
+        }
+
+        return Result.success();
+    }
+
+    @ApiOperation(value = "1.1.5 根据id查询员工信息")
+    @GetMapping("/{id}")
+    public Result<EmployeeDO> getById(@PathVariable Long id){
+        EmployeeDO employeeDO = employeeService.getById(id);
+        if(employeeDO == null){
+            return Result.error("无此员工信息");
+        }
+        employeeDO.setPassword("****");
+        return Result.success(employeeDO);
+    }
+
+    @ApiOperation(value = "1.1.6 修改员工信息")
+    @PutMapping
+    public Result updateEmployee(@RequestBody EmployeeUpdatePO po){
+        EmployeeDO employeeDO = new EmployeeDO();
+        BeanUtil.copyProperties(po, employeeDO);
+        employeeDO.setUpdateTime(DateUtil.getCurTime());
+        employeeDO.setUpdateUser(BaseContext.getCurrentId());
+
+        boolean flag = employeeService.updateEmployee(employeeDO);
+        if(flag){
+            return Result.success();
+        }else {
+            return Result.error("修改失败!");
+        }
+    }
+
+    @ApiOperation(value = "1.1.10 员工退出")
+    @PostMapping("/logout")
+    public Result<String> logout() {
         return Result.success();
     }
 

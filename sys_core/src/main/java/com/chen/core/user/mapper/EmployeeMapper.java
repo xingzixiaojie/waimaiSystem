@@ -13,18 +13,41 @@ import java.util.List;
 public interface EmployeeMapper {
 
     /**
-     * 根据员工用户名查询员工信息
-     * @param username 员工用户名
-     * @return 员工信息
-     */
-    EmployeeDO getByUsername(@Param("username") String username);
-
-    /**
      * 新增员工信息
      * @param employeeDO 员工信息
      * @return 影响条数
      */
     int insertEmployee(EmployeeDO employeeDO);
+
+    /**
+     * 修改员工信息
+     * @param employeeDO 员工信息
+     * @return 影响条数
+     */
+    int updateEmployee(EmployeeDO employeeDO);
+
+
+    /**
+     * 修改员工账号状态
+     * @param id 员工id
+     * @param status 员工账号状态，1：启用， 0：禁用
+     * @return 影响条数
+     */
+    int updateStatus(@Param("id") Long id, @Param("status") Integer status);
+
+    /**
+     * 根据员工Id查询员工信息
+     * @param id 员工Id
+     * @return 员工信息
+     */
+    EmployeeDO getById(@Param("id") Long id);
+
+    /**
+     * 根据员工用户名查询员工信息
+     * @param username 员工用户名
+     * @return 员工信息
+     */
+    EmployeeDO getByUsername(@Param("username") String username);
 
     /**
      * 查询员工信息列表

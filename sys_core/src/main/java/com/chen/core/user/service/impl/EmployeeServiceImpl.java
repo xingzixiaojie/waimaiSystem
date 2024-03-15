@@ -70,6 +70,43 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
+     * 修改员工信息
+     * @param employeeDO 员工信息
+     * @return 操作成功：返回true，操作失败：返回false
+     */
+    @Override
+    public boolean updateEmployee(EmployeeDO employeeDO) {
+        Long id = employeeDO.getId();
+        EmployeeDO hasEmployee = this.getById(id);
+        if (hasEmployee == null ){
+            return false;
+        }
+        boolean executeSuccess = employeeMapper.updateEmployee(employeeDO) > 0;
+        return executeSuccess;
+    }
+
+    /**
+     * 修改员工账号状态
+     * @param id 员工id
+     * @param status 员工账号状态，1：启用， 0：禁用
+     * @return 操作成功：返回true，操作失败：返回false
+     */
+    @Override
+    public boolean updateStatus(Long id, Integer status) {
+        return employeeMapper.updateStatus(id, status) > 0;
+    }
+
+    /**
+     * 根据员工Id查询员工信息
+     * @param id 员工Id
+     * @return 员工信息
+     */
+    @Override
+    public EmployeeDO getById(Long id) {
+        return employeeMapper.getById(id);
+    }
+
+    /**
      * 根据员工用户名查询员工信息
      * @param username 员工用户名
      * @return 员工信息
