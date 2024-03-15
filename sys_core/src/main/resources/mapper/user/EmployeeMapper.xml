@@ -20,5 +20,17 @@
         VALUES (#{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{status}, #{createTime},
                 #{updateTime}, #{createUser}, #{updateUser})
     </insert>
+    
+    <!--  查询员工信息列表  -->
+    <select id="listAll" resultType="com.chen.core.user.entity.EmployeeDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM employee
+        <where>
+            <if test="employeeName != null and employeeName != '' ">
+                AND name LIKE CONCAT('%', #{employeeName}, '%')
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
 
 </mapper>

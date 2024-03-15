@@ -1,5 +1,6 @@
 package com.chen.core.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -33,6 +34,7 @@ public class UserDO implements Serializable {
     private String avatar;
 
     /** 注册时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Timestamp createTime;
 
 }

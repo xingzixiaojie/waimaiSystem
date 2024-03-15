@@ -4,6 +4,8 @@ import com.chen.core.user.entity.EmployeeDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 内部的员工信息操作
  */
@@ -23,5 +25,12 @@ public interface EmployeeMapper {
      * @return 影响条数
      */
     int insertEmployee(EmployeeDO employeeDO);
+
+    /**
+     * 查询员工信息列表
+     * @param employeeName 员工姓名，支持模糊查询，查询全部填NULL
+     * @return 员工信息列表
+     */
+    List<EmployeeDO> listAll(@Param("employeeName") String employeeName);
 
 }

@@ -1,6 +1,8 @@
 package com.chen.core.user.service;
 
+import com.chen.common.result.QueryPage;
 import com.chen.core.user.entity.EmployeeDO;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 员工信息操作
@@ -28,4 +30,11 @@ public interface EmployeeService {
      */
     EmployeeDO getByUsername(String username);
 
+    /**
+     * 查询员工信息列表
+     * @param page 分页对象
+     * @param employeeName 员工姓名，支持模糊查询，查询全部填NULL
+     * @return 员工信息列表
+     */
+    PageInfo<EmployeeDO> listAll (QueryPage page, String employeeName);
 }

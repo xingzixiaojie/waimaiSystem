@@ -1,5 +1,6 @@
 package com.chen.core.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -26,9 +27,11 @@ public class OrdersDO implements Serializable {
     private Long addressBookId;
 
     /** 下单时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Timestamp orderTime;
 
     /** 付款时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Timestamp checkoutTime;
 
     /** 支付方式, 1：微信支付，2：支付宝支付 */

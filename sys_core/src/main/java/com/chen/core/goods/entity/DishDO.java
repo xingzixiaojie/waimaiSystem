@@ -1,6 +1,7 @@
 package com.chen.core.goods.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -33,9 +34,11 @@ public class DishDO implements Serializable {
     private Integer status;
 
     /** 菜品创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Timestamp createTime;
 
     /** 菜品最后修改时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Timestamp updateTime;
 
     /** 菜品创建人id */
