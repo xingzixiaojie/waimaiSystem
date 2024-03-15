@@ -18,7 +18,7 @@ public class OverallExceptionResolver {
     /**
      * 捕获业务异常
      * @param ex
-     * @return
+     * @return 状态码
      */
     @ExceptionHandler
     public Result exceptionHandler(BaseException ex){
@@ -26,6 +26,11 @@ public class OverallExceptionResolver {
         return Result.error(ex.getMessage());
     }
 
+    /**
+     * 处理SQL异常
+     * @param ex SQL异常
+     * @return 状态码
+     */
     @ExceptionHandler
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex){
         String message = ex.getMessage();

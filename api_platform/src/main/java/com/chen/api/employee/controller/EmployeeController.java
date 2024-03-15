@@ -7,6 +7,7 @@ import com.chen.api.employee.vo.EmployeeLoginVO;
 import com.chen.common.constant.JwtClaimsConstant;
 import com.chen.common.constant.PasswordConstant;
 import com.chen.common.constant.StatusConstant;
+import com.chen.common.context.BaseContext;
 import com.chen.common.properties.JwtProperties;
 import com.chen.common.result.Result;
 import com.chen.common.utils.DateUtil;
@@ -92,6 +93,7 @@ public class EmployeeController {
     @ApiOperation(value = "1.1.3 添加员工")
     @PostMapping
     public Result create(@RequestBody EmployeeCreatePO po){
+
         EmployeeDO employeeDO = new EmployeeDO();
         BeanUtil.copyProperties(po, employeeDO);
         employeeDO.setCreateTime(DateUtil.getCurTime());
@@ -101,10 +103,10 @@ public class EmployeeController {
         //设置员工默认密码为123456
         employeeDO.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes(StandardCharsets.UTF_8)));
 
-        //TODO 设置当前记录创建人和修改人id
-        employeeDO.setCreateUser(10L);
-        employeeDO.setUpdateUser(10L);
-        return null;
+        employeeDO.setCreateUser(BaseContext.getCurrentId());
+        employeeDO.setUpdateUser(BaseContext.getCurrentId());
+        boolean flag = employeeService.insertEmployee(employeeDO);
+        return Result.success();
     }
 
 }
