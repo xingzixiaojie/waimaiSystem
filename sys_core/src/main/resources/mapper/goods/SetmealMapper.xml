@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chen.core.goods.mapper.SetmealMapper">
 
+    <sql id="All_Column_List">
+        id, name, category_id, price, image, description, status,
+        create_time, update_time, create_user, update_user
+    </sql>
+
+
+    <!--  根据分类id查询套餐的数量  -->
+    <select id="countByCategoryId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        SELECT COUNT(id)
+        FROM setmeal
+        WHERE category_id = #{categoryId}
+    </select>
+
 </mapper>
