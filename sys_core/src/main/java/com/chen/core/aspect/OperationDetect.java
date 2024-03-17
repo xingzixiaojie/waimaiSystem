@@ -1,4 +1,4 @@
-package com.chen.common.aspect;
+package com.chen.core.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;

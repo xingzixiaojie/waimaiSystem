@@ -1,4 +1,4 @@
-package com.chen.common.annotation;
+package com.chen.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
