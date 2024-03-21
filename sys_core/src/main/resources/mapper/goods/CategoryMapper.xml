@@ -43,6 +43,7 @@
     <delete id="deleteCategory" parameterType="java.lang.Long">
         DELETE FROM category WHERE id = #{id}
     </delete>
+
     <!--  查询分类信息  -->
     <select id="listCategory" resultType="com.chen.core.goods.entity.CategoryDO">
         SELECT <include refid="All_Column_List"/>

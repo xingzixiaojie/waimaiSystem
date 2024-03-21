@@ -15,6 +15,6 @@ public interface SetmealMapper {
      * @param categoryId 分类Id
      * @return 套餐的数量
      */
-    Integer countByCategoryId(@Param("categoryId") Long categoryId);
+    int countByCategoryId(@Param("categoryId") Long categoryId);
 
 }

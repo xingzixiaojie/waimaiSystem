@@ -10,10 +10,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OssConfiguration {
 
+    /**
+     * 实例化AliOSSUtil
+     * @param aliOssProperties 阿里云OSS属性
+     * @return AliOssUtil
+     */
     @Bean
     @ConditionalOnMissingBean
     public AliOssUtil aliOssUtil(AliOssProperties aliOssProperties){
-
         LogUtil.printInfo("开始创建阿里云文件上传工具类对象：{"+aliOssProperties+"}");
         return new AliOssUtil(aliOssProperties.getEndpoint(),
                 aliOssProperties.getAccessKeyId(),

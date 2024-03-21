@@ -22,8 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/category")
-@Api(tags = "2.1 分类相关接口")
-
+@Api(tags = "2.1 分类管理")
 public class CategoryController {
 
     @Resource

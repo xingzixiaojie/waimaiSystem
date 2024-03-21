@@ -38,12 +38,12 @@ dependencies {
 
     //com.aliyun.oss
     compile "com.aliyun.oss:aliyun-sdk-oss:3.10.2"
+    //jaxb-api
+    compile "javax.xml.bind:jaxb-api:2.3.1"
 
     //jjwt,Token生成
     compile "io.jsonwebtoken:jjwt:0.9.1"
 
-    //jaxb-api
-    compile "javax.xml.bind:jaxb-api:2.3.1"
 
     //poi
     compile "org.apache.poi:poi:3.16"
