@@ -35,6 +35,13 @@ public interface CategoryMapper {
     int deleteCategory(@Param("id") Long id);
 
     /**
+     * 根据id获取分类信息
+     * @param id 主键
+     * @return 分类信息
+     */
+    CategoryDO getById(@Param("id") Long id);
+
+    /**
      * 查询分类信息
      * @param name 分类名称，查询全部填NULL，支持模糊查询
      * @param type 分类类型，查询全部填NULL
@@ -43,4 +50,9 @@ public interface CategoryMapper {
      */
     List<CategoryDO> listCategory(@Param("name") String name, @Param("type") Integer type, @Param("status") Integer status);
 
+    /**
+     * 查询所有分类信息
+     * @return 分类信息集合
+     */
+    List<CategoryDO> listAll();
 }

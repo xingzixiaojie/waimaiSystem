@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 商品的分类信息
@@ -110,6 +111,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.deleteCategory(id) > 0;
     }
 
+
     /**
      * 查询分类信息
      * @param page 分页对象
@@ -124,6 +126,15 @@ public class CategoryServiceImpl implements CategoryService {
             PageHelper.startPage(page.getPageNum(), page.getPageSize());
         }
         return new PageInfo<>(categoryMapper.listCategory(name, type, status));
+    }
+
+    /**
+     * 查询所有分类信息
+     * @return 分类信息集合
+     */
+    @Override
+    public List<CategoryDO> listAll(){
+        return categoryMapper.listAll();
     }
 
 }

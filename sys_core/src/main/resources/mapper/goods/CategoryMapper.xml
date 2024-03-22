@@ -44,6 +44,13 @@
         DELETE FROM category WHERE id = #{id}
     </delete>
 
+    <!--  根据id获取分类信息  -->
+    <select id="getById" parameterType="java.lang.Long" resultType="com.chen.core.goods.entity.CategoryDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM category
+        where id = #{id}
+    </select>
+
     <!--  查询分类信息  -->
     <select id="listCategory" resultType="com.chen.core.goods.entity.CategoryDO">
         SELECT <include refid="All_Column_List"/>
@@ -60,6 +67,12 @@
             </if>
         </where>
         ORDER BY sort ASC, create_time DESC
+    </select>
+
+    <!--  查询所有分类信息  -->
+    <select id="listAll" resultType="com.chen.core.goods.entity.CategoryDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM category
     </select>
 
 </mapper>

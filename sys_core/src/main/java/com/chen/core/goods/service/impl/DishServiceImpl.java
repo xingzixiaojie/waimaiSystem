@@ -2,12 +2,15 @@ package com.chen.core.goods.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.chen.common.result.QueryPage;
 import com.chen.core.goods.bo.DishBO;
 import com.chen.core.goods.entity.DishDO;
 import com.chen.core.goods.entity.DishFlavorDO;
 import com.chen.core.goods.mapper.DishMapper;
 import com.chen.core.goods.service.DishFlavorService;
 import com.chen.core.goods.service.DishService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -74,6 +77,20 @@ public class DishServiceImpl implements DishService {
     @Override
     public DishDO getByName(String name){
         return dishMapper.getByName(name);
+    }
+
+    /**
+     * 查询全部菜品信息
+     * @param page 分页信息
+     * @param name 菜品名称，支持模糊查询，查询全部填NULL
+     * @param categoryId 菜品分类id，查询全部填NULL
+     * @param status 售卖状态，1：起售， 0：停售, 查询全部填NULL
+     * @return 菜品信息集合
+     */
+    @Override
+    public PageInfo<DishDO> list(QueryPage page, String name, Long categoryId, Integer status){
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        return new PageInfo<>(dishMapper.list(name, categoryId, status));
     }
 
 }

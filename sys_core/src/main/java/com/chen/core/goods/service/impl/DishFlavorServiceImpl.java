@@ -36,4 +36,13 @@ public class DishFlavorServiceImpl implements DishFlavorService {
         return dishFlavorMapper.insertList(dishFlavorDOList) > 0;
     }
 
+    /**
+     * 获取所有菜品口味信息
+     * @return 菜品口味信息集合
+     */
+    @Override
+    public List<DishFlavorDO> listAll(){
+        return dishFlavorMapper.listAll();
+    }
+
 }

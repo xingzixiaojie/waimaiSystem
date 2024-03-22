@@ -23,5 +23,10 @@ public interface DishFlavorService {
      */
     boolean insertDishFlavor(List<DishFlavorDO> dishFlavorDOList);
 
+    /**
+     * 获取所有菜品口味信息
+     * @return 菜品口味信息集合
+     */
+    List<DishFlavorDO> listAll();
 
 }

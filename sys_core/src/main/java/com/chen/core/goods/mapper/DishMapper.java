@@ -6,6 +6,8 @@ import com.chen.core.goods.entity.DishDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 菜品的信息
  */
@@ -33,5 +35,14 @@ public interface DishMapper {
      * @return 菜品信息
      */
     DishDO getByName(@Param("name") String name);
+
+    /**
+     * 查询全部菜品信息
+     * @param name 菜品名称，支持模糊查询，查询全部填NULL
+     * @param categoryId 菜品分类id，查询全部填NULL
+     * @param status 售卖状态，1：起售， 0：停售,查询全部填NULL
+     * @return 菜品信息集合
+     */
+    List<DishDO> list(@Param("name") String name, @Param("categoryId") Long categoryId, @Param("status") Integer status);
 
 }

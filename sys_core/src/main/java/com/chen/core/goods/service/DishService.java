@@ -1,7 +1,9 @@
 package com.chen.core.goods.service;
 
+import com.chen.common.result.QueryPage;
 import com.chen.core.goods.bo.DishBO;
 import com.chen.core.goods.entity.DishDO;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 菜品的信息
@@ -30,4 +32,15 @@ public interface DishService {
      * @return 菜品信息
      */
     DishDO getByName(String name);
+
+    /**
+     * 查询全部菜品信息
+     * @param page 分页信息
+     * @param name 菜品名称，支持模糊查询，查询全部填NULL
+     * @param categoryId 菜品分类id，查询全部填NULL
+     * @param status 售卖状态，1：起售， 0：停售, 查询全部填NULL
+     * @return 菜品信息集合
+     */
+    PageInfo<DishDO> list(QueryPage page, String name, Long categoryId, Integer status);
+
 }

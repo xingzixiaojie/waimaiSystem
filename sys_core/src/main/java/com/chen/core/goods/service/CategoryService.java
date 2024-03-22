@@ -4,6 +4,8 @@ import com.chen.common.result.QueryPage;
 import com.chen.core.goods.entity.CategoryDO;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * 商品的分类信息
  */
@@ -39,6 +41,7 @@ public interface CategoryService {
      */
     boolean deleteById(Long id);
 
+
     /**
      * 查询分类信息
      * @param page 分页对象
@@ -48,5 +51,11 @@ public interface CategoryService {
      * @return 分类信息集合
      */
     PageInfo<CategoryDO> pageQuery(QueryPage page, String name, Integer type, Integer status);
+
+    /**
+     * 查询所有分类信息
+     * @return 分类信息集合
+     */
+    List<CategoryDO> listAll();
 
 }

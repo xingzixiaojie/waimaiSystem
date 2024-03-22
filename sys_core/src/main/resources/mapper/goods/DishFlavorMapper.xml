@@ -21,4 +21,10 @@
             </foreach>
     </insert>
 
+    <!--  获取所有菜品口味信息  -->
+    <select id="listAll" resultType="com.chen.core.goods.entity.DishFlavorDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM dish_flavor
+    </select>
+
 </mapper>
