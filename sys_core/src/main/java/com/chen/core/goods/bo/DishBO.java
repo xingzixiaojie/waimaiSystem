@@ -9,10 +9,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 菜品信息PO */
-@ApiModel("菜品信息PO")
+/** 菜品信息BO */
+@ApiModel("菜品信息BO")
 @Data
 public class DishBO implements Serializable {
+
+    /** 主键自增 */
+    private Long id;
 
     /** 菜品名称 */
     private String name;

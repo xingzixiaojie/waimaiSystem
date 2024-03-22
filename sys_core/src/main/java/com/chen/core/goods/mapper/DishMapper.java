@@ -30,11 +30,26 @@ public interface DishMapper {
     int deleteByIds(@Param("ids") List<Long> ids);
 
     /**
+     * 修改菜品信息
+     * @param dishDO 菜品信息
+     * @return 影响条数
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    int update(DishDO dishDO);
+
+    /**
      * 根据分类id查询菜品数量
      * @param categoryId 分类Id
      * @return 菜品数量
      */
     int countByCategoryId(@Param("categoryId") Long categoryId);
+
+    /**
+     * 根据菜品Id查询菜品信息
+     * @param id 菜品Id
+     * @return 菜品信息
+     */
+    DishDO getById(@Param("id") Long id);
 
     /**
      * 根据菜品名称获取菜品信息

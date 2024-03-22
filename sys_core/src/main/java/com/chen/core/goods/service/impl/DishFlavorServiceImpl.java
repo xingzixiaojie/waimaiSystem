@@ -47,6 +47,26 @@ public class DishFlavorServiceImpl implements DishFlavorService {
     }
 
     /**
+     * 根据菜品id删除菜品口味
+     * @param dishId 菜品id
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    @Override
+    public boolean deteleByDishId(Long dishId){
+        return dishFlavorMapper.deteleByDishId(dishId) > 0;
+    }
+
+    /**
+     * 根据菜品id查询菜品口味信息
+     * @param dishId 品id
+     * @return 菜品口味信息集合
+     */
+    @Override
+    public List<DishFlavorDO> listByDishId(Long dishId){
+        return dishFlavorMapper.listByDishId(dishId);
+    }
+
+    /**
      * 获取所有菜品口味信息
      * @return 菜品口味信息集合
      */

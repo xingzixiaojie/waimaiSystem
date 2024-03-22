@@ -118,4 +118,30 @@ public class DishController {
         }
     }
 
+    @ApiOperation("4.1.4 根据菜品Id查询菜品")
+    @GetMapping("/{id}")
+    public Result<DishVO> getById(@PathVariable Long id){
+        DishDO dishDO = dishService.getById(id);
+        List<DishFlavorDO> flavorDOList = dishFlavorService.listByDishId(id);
+        DishVO dishVO = new DishVO();
+        BeanUtil.copyProperties(dishDO, dishVO);
+        dishVO.setFlavors(flavorDOList);
+
+        return Result.success(dishVO);
+    }
+
+    @ApiOperation("4.1.5 修改菜品")
+    @PutMapping
+    public Result update(@RequestBody DishPO po){
+        DishBO dishBO = new DishBO();
+        BeanUtil.copyProperties(po, dishBO);
+        dishBO.setFlavorList(po.getFlavors());
+        boolean flag = dishService.update(dishBO);
+        if (flag){
+            return Result.success();
+        }else{
+            return Result.error("操作失败");
+        }
+    }
+
 }

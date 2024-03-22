@@ -19,6 +19,13 @@ public interface DishService {
      */
     boolean insertDish(DishBO dishBO);
 
+    /**
+     * 修改菜品信息
+     * @param dishBO 菜品信息BO
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    boolean update(DishBO dishBO);
+
 
     /**
      * 根据分类id查询菜品数量
@@ -27,6 +34,12 @@ public interface DishService {
      */
     Integer countByCategoryId(Long categoryId);
 
+    /**
+     * 根据菜品Id查询菜品信息
+     * @param id 菜品Id
+     * @return 菜品信息
+     */
+    DishDO getById(Long id);
 
     /**
      * 根据菜品名称获取菜品信息

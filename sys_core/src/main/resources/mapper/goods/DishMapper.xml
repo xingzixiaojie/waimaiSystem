@@ -22,11 +22,50 @@
         </foreach>
     </delete>
 
+    <!--  修改菜品信息  -->
+    <update id="update">
+        UPDATE dish
+        <set>
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="image != null and image != '' ">
+                image = #{image},
+            </if>
+            <if test="description != null and description != '' ">
+                description = #{description},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
     <!--  根据分类id查询菜品数量  -->
     <select id="countByCategoryId" parameterType="java.lang.Long" resultType="java.lang.Integer">
         SELECT COUNT(id)
         FROM dish
         WHERE category_id = #{categoryId}
+    </select>
+
+    <!--  根据菜品Id查询菜品信息  -->
+    <select id="getById" parameterType="java.lang.Long" resultType="com.chen.core.goods.entity.DishDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM dish
+        WHERE id = #{id}
     </select>
 
     <!--  根据菜品名称获取菜品信息  -->

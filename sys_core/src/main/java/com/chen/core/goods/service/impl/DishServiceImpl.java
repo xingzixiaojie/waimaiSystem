@@ -70,6 +70,40 @@ public class DishServiceImpl implements DishService {
     }
 
     /**
+     * 修改菜品信息
+     * @param dishBO 菜品信息BO
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean update(DishBO dishBO){
+        DishDO dishDO = new DishDO();
+        BeanUtil.copyProperties(dishBO, dishDO);
+        boolean executeSuccess = dishMapper.update(dishDO) > 0;
+
+        if(executeSuccess){
+
+            List<DishFlavorDO> flavorDOList = dishFlavorService.listByDishId(dishBO.getId());
+            if (CollUtil.isNotEmpty(flavorDOList)) {
+                executeSuccess = dishFlavorService.deteleByDishId(dishBO.getId());
+            }
+        }
+        if (CollUtil.isNotEmpty(dishBO.getFlavorList())){
+            if(executeSuccess){
+                List<DishFlavorDO> flavorList = dishBO.getFlavorList();
+                flavorList.forEach(dishFlavorDO -> dishFlavorDO.setDishId(dishBO.getId()));
+                executeSuccess = dishFlavorService.insertDishFlavor(flavorList);
+            }
+        }
+
+        if (!executeSuccess){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 根据分类id查询菜品数量
      * @param categoryId 分类Id
      * @return 菜品数量
@@ -77,6 +111,16 @@ public class DishServiceImpl implements DishService {
     @Override
     public Integer countByCategoryId(Long categoryId){
         return dishMapper.countByCategoryId(categoryId);
+    }
+
+    /**
+     * 根据菜品Id查询菜品信息
+     * @param id 菜品Id
+     * @return 菜品信息
+     */
+    @Override
+    public DishDO getById(Long id){
+        return dishMapper.getById(id);
     }
 
     /**
@@ -132,7 +176,9 @@ public class DishServiceImpl implements DishService {
                 }
             }
         }
-        executeSuccess = dishFlavorService.deleteByIds(deleteIds);
+        if(executeSuccess){
+            executeSuccess = dishFlavorService.deleteByIds(deleteIds);
+        }
 
         if (!executeSuccess){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

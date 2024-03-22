@@ -30,6 +30,19 @@
         </foreach>
     </delete>
 
+    <!--  根据菜品id删除菜品口味  -->
+    <delete id="deteleByDishId" parameterType="java.lang.Long">
+        DELETE FROM dish_flavor
+        WHERE dish_id = #{dishId}
+    </delete>
+
+    <!--  根据菜品id查询菜品口味信息  -->
+    <select id="listByDishId" parameterType="java.lang.Long" resultType="com.chen.core.goods.entity.DishFlavorDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM dish_flavor
+        WHERE dish_id = #{dishId}
+    </select>
+
     <!--  获取所有菜品口味信息  -->
     <select id="listAll" resultType="com.chen.core.goods.entity.DishFlavorDO">
         SELECT <include refid="All_Column_List"/>
