@@ -23,6 +23,13 @@ public interface DishMapper {
     int insert(DishDO dishDO);
 
     /**
+     * 根据菜品id集合批量删除菜品信息
+     * @param ids 菜品id集合
+     * @return 影响条数
+     */
+    int deleteByIds(@Param("ids") List<Long> ids);
+
+    /**
      * 根据分类id查询菜品数量
      * @param categoryId 分类Id
      * @return 菜品数量

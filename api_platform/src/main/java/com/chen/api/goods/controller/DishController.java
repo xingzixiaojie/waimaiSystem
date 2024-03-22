@@ -107,4 +107,15 @@ public class DishController {
         return Result.success(new PageResult(dishDOPageInfo.getTotal(), resultList));
     }
 
+    @ApiOperation("4.1.3 菜品批量删除")
+    @DeleteMapping
+    public Result delete(@RequestParam List<Long> ids){
+        boolean flag = dishService.deleteBatch(ids);
+        if (flag){
+            return Result.success();
+        }else {
+            return Result.error("操作失败");
+        }
+    }
+
 }

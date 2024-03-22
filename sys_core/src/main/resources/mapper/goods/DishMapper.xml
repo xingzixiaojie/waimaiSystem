@@ -13,6 +13,15 @@
         VALUES (#{name}, #{categoryId}, #{price}, #{image}, #{description}, #{createTime}, #{updateUser}, #{updateUser}, #{updateTime})
     </insert>
 
+    <!--  根据菜品id集合批量删除菜品信息  -->
+    <delete id="deleteByIds">
+        DELETE FROM dish
+        WHERE id IN
+        <foreach collection="ids" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </delete>
+
     <!--  根据分类id查询菜品数量  -->
     <select id="countByCategoryId" parameterType="java.lang.Long" resultType="java.lang.Integer">
         SELECT COUNT(id)

@@ -24,6 +24,13 @@ public interface DishFlavorService {
     boolean insertDishFlavor(List<DishFlavorDO> dishFlavorDOList);
 
     /**
+     * 根据菜品口味id集合批量删除菜品口味信息
+     * @param ids 菜品口味id集合
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    boolean deleteByIds(List<Long> ids);
+
+    /**
      * 获取所有菜品口味信息
      * @return 菜品口味信息集合
      */

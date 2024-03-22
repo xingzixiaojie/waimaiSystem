@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chen.core.goods.mapper.SetmealDishMapper">
 
+    <sql id="All_Column_List">
+        id, setmeal_id, dish_id,
+        name, price, copies
+    </sql>
+
+    <!--  获取所有的套餐和菜品关联信息  -->
+    <select id="listAll" resultType="com.chen.core.goods.entity.SetmealDishDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM setmeal_dish
+    </select>
+
 </mapper>

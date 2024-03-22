@@ -2,13 +2,18 @@ package com.chen.core.goods.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.chen.common.constant.MessageConstant;
+import com.chen.common.constant.StatusConstant;
+import com.chen.common.exception.DeletionNotAllowedException;
 import com.chen.common.result.QueryPage;
 import com.chen.core.goods.bo.DishBO;
 import com.chen.core.goods.entity.DishDO;
 import com.chen.core.goods.entity.DishFlavorDO;
+import com.chen.core.goods.entity.SetmealDishDO;
 import com.chen.core.goods.mapper.DishMapper;
 import com.chen.core.goods.service.DishFlavorService;
 import com.chen.core.goods.service.DishService;
+import com.chen.core.goods.service.SetmealDishService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +37,10 @@ public class DishServiceImpl implements DishService {
     /** 菜品的口味信息 */
     @Resource
     private DishFlavorService dishFlavorService;
+
+    /** 套餐和菜品的关联关系 */
+    @Resource
+    private SetmealDishService setmealDishService;
 
     /**
      * 新增菜品和口味信息
@@ -77,6 +87,59 @@ public class DishServiceImpl implements DishService {
     @Override
     public DishDO getByName(String name){
         return dishMapper.getByName(name);
+    }
+
+    /**
+     * 根据菜品id集合批量删除菜品信息
+     * @param ids 菜品id集合
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteBatch(List<Long> ids){
+        //判断当前菜品是否处于启售状态
+        List<DishDO> dishDOList = dishMapper.list(null, null, null);
+        for(Long id : ids){
+            for(DishDO dishDO : dishDOList){
+                if(id.longValue() == dishDO.getId().longValue()){
+                    if(dishDO.getStatus() == StatusConstant.ENABLE){
+                        throw new DeletionNotAllowedException(MessageConstant.DISH_ON_SALE);
+                    }
+                }
+            }
+        }
+
+        //判断当前菜品是否被套餐关联
+        List<SetmealDishDO> setmealDishDOList = setmealDishService.listAll();
+        for(Long id : ids){
+            for(SetmealDishDO setmealDishDO : setmealDishDOList){
+                if(id.longValue() == setmealDishDO.getDishId().longValue()){
+                    throw new DeletionNotAllowedException(MessageConstant.DISH_BE_RELATED_BY_SETMEAL);
+                }
+            }
+        }
+
+        //删除菜品表中的菜品
+        boolean executeSuccess = dishMapper.deleteByIds(ids) > 0;
+
+        //删除菜品口味中的口味
+        List<DishFlavorDO> flavorDOList = dishFlavorService.listAll();
+        List<Long> deleteIds = new ArrayList<>();
+        for(Long id : ids){
+            for(DishFlavorDO dishFlavorDO : flavorDOList){
+                if(id.longValue() == dishFlavorDO.getDishId().longValue()){
+                    deleteIds.add(dishFlavorDO.getId());
+                }
+            }
+        }
+        executeSuccess = dishFlavorService.deleteByIds(deleteIds);
+
+        if (!executeSuccess){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return false;
+        }
+        return true;
+
     }
 
     /**

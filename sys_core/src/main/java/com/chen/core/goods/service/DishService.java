@@ -5,6 +5,8 @@ import com.chen.core.goods.bo.DishBO;
 import com.chen.core.goods.entity.DishDO;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * 菜品的信息
  */
@@ -32,6 +34,13 @@ public interface DishService {
      * @return 菜品信息
      */
     DishDO getByName(String name);
+
+    /**
+     * 根据菜品id集合批量删除菜品信息
+     * @param ids 菜品id集合
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    boolean deleteBatch(List<Long> ids);
 
     /**
      * 查询全部菜品信息

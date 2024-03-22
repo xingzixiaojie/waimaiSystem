@@ -21,6 +21,15 @@
             </foreach>
     </insert>
 
+    <!--  根据菜品口味id集合批量删除菜品口味信息  -->
+    <delete id="deleteByIds">
+        DELETE FROM dish_flavor
+        WHERE id IN
+        <foreach collection="ids" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </delete>
+
     <!--  获取所有菜品口味信息  -->
     <select id="listAll" resultType="com.chen.core.goods.entity.DishFlavorDO">
         SELECT <include refid="All_Column_List"/>

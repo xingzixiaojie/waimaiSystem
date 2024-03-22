@@ -37,6 +37,16 @@ public class DishFlavorServiceImpl implements DishFlavorService {
     }
 
     /**
+     * 根据菜品口味id集合批量删除菜品口味信息
+     * @param ids 菜品口味id集合
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    @Override
+    public boolean deleteByIds(List<Long> ids){
+        return dishFlavorMapper.deleteByIds(ids) > 0;
+    }
+
+    /**
      * 获取所有菜品口味信息
      * @return 菜品口味信息集合
      */
