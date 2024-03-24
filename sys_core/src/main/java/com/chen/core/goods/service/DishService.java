@@ -63,6 +63,13 @@ public interface DishService {
     boolean deleteBatch(List<Long> ids);
 
     /**
+     * 根据菜品分类id查询菜品信息
+     * @param categoryId 菜品分类id
+     * @return 菜品信息集合
+     */
+    List<DishDO> listByCategoryId(Long categoryId);
+
+    /**
      * 查询全部菜品信息
      * @param page 分页信息
      * @param name 菜品名称，支持模糊查询，查询全部填NULL

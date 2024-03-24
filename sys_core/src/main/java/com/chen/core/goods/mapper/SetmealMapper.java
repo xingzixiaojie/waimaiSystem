@@ -43,7 +43,7 @@ public interface SetmealMapper {
      * @param ids 套餐id集合
      * @return 影响条数
      */
-    int deleteBatchByIds(@Param("ids") List<Long> ids);
+    int deleteBatchByIds(@Param("list") List<Long> ids);
 
     /**
      * 根据分类id查询套餐的数量

@@ -186,7 +186,7 @@ public class DishServiceImpl implements DishService {
                 }
             }
         }
-        if(executeSuccess){
+        if(executeSuccess && CollUtil.isNotEmpty(deleteIds)){
             executeSuccess = dishFlavorService.deleteByIds(deleteIds);
         }
 
@@ -196,6 +196,16 @@ public class DishServiceImpl implements DishService {
         }
         return true;
 
+    }
+
+    /**
+     * 根据菜品分类id查询菜品信息
+     * @param categoryId 菜品分类id
+     * @return 菜品信息集合
+     */
+    @Override
+    public List<DishDO> listByCategoryId(Long categoryId){
+        return dishMapper.list(null, categoryId, null);
     }
 
     /**

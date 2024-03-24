@@ -17,7 +17,7 @@
     <delete id="deleteByIds">
         DELETE FROM dish
         WHERE id IN
-        <foreach collection="ids" item="item" separator="," open="(" close=")">
+        <foreach collection="list" item="item" separator="," open="(" close=")">
             #{item}
         </foreach>
     </delete>
@@ -55,7 +55,7 @@
     </update>
 
     <!--  修改菜品售卖状态  -->
-    <update id="updateStatus" parameterType="java.lang.Integer">
+    <update id="updateStatus">
         UPDATE dish
         SET status = #{status}
         WHERE id = #{id}

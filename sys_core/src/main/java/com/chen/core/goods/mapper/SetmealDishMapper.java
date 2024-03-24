@@ -17,14 +17,14 @@ public interface SetmealDishMapper {
      * @param setmealDishDOList 套餐菜品关系信息集合
      * @return 影响条数
      */
-    int insertBatch(List<SetmealDishDO> setmealDishDOList);
+    int insertBatch(@Param("list") List<SetmealDishDO> setmealDishDOList);
 
     /**
      * 根据套餐id集合批量删除套餐菜品关系信息
      * @param setmealIds 套餐id集合
      * @return 影响条数
      */
-    int deleteBatchBySetmealIds(List<Long> setmealIds);
+    int deleteBatchBySetmealIds(@Param("list") List<Long> setmealIds);
 
     /**
      * 根据套餐id查询套餐菜品关联信息

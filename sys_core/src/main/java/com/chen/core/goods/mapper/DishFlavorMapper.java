@@ -24,14 +24,14 @@ public interface DishFlavorMapper {
      * @param dishFlavorDOList
      * @return 影响条数
      */
-    int insertList(List<DishFlavorDO> dishFlavorDOList);
+    int insertList(@Param("list") List<DishFlavorDO> dishFlavorDOList);
 
     /**
      * 根据菜品口味id集合批量删除菜品口味信息
      * @param ids 菜品口味id集合
      * @return 影响条数
      */
-    int deleteByIds(@Param("ids") List<Long> ids);
+    int deleteByIds(@Param("list") List<Long> ids);
 
     /**
      * 根据菜品id删除菜品口味

@@ -58,7 +58,7 @@
     <delete id="deleteBatchByIds">
         DELETE FROM setmeal
         WHERE id IN
-        <foreach collection="ids" item="item" separator="," open="(" close=")">
+        <foreach collection="list" item="item" separator="," open="(" close=")">
             #{item}
         </foreach>
     </delete>

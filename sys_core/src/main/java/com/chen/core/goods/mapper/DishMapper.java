@@ -27,7 +27,7 @@ public interface DishMapper {
      * @param ids 菜品id集合
      * @return 影响条数
      */
-    int deleteByIds(@Param("ids") List<Long> ids);
+    int deleteByIds(@Param("list") List<Long> ids);
 
     /**
      * 修改菜品信息
