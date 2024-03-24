@@ -38,6 +38,14 @@ public interface DishMapper {
     int update(DishDO dishDO);
 
     /**
+     * 修改菜品售卖状态
+     * @param status 售卖状态， 1：起售， 0：停售
+     * @param id 主键
+     * @return 影响条数
+     */
+    int updateStatus(@Param("status") Integer status, @Param("id") Long id);
+
+    /**
      * 根据分类id查询菜品数量
      * @param categoryId 分类Id
      * @return 菜品数量

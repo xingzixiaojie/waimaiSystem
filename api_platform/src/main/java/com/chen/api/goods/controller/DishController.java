@@ -144,4 +144,15 @@ public class DishController {
         }
     }
 
+    @ApiOperation("4.1.6 修改菜品售卖状态")
+    @PostMapping("/status/{status}")
+    public Result updateStatus(@PathVariable("status") Integer status, Long id){
+        boolean flag = dishService.updateStatus(status, id);
+        if (flag){
+            return Result.success();
+        }else{
+            return Result.error("操作失败");
+        }
+    }
+
 }

@@ -26,6 +26,13 @@ public interface DishService {
      */
     boolean update(DishBO dishBO);
 
+    /**
+     * 修改菜品售卖状态
+     * @param status 售卖状态， 1：起售， 0：停售
+     * @param id 主键
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    boolean updateStatus(Integer status, Long id);
 
     /**
      * 根据分类id查询菜品数量

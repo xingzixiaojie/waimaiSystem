@@ -54,6 +54,14 @@
         WHERE id = #{id}
     </update>
 
+    <!--  修改菜品售卖状态  -->
+    <update id="updateStatus" parameterType="java.lang.Integer">
+        UPDATE dish
+        SET status = #{status}
+        WHERE id = #{id}
+          AND status != #{status}
+    </update>
+
     <!--  根据分类id查询菜品数量  -->
     <select id="countByCategoryId" parameterType="java.lang.Long" resultType="java.lang.Integer">
         SELECT COUNT(id)

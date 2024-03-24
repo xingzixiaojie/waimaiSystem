@@ -82,7 +82,6 @@ public class DishServiceImpl implements DishService {
         boolean executeSuccess = dishMapper.update(dishDO) > 0;
 
         if(executeSuccess){
-
             List<DishFlavorDO> flavorDOList = dishFlavorService.listByDishId(dishBO.getId());
             if (CollUtil.isNotEmpty(flavorDOList)) {
                 executeSuccess = dishFlavorService.deteleByDishId(dishBO.getId());
@@ -101,6 +100,17 @@ public class DishServiceImpl implements DishService {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 修改菜品售卖状态
+     * @param status 售卖状态， 1：起售， 0：停售
+     * @param id 主键
+     * @return 操作成功:返回true，操作失败:返回false
+     */
+    @Override
+    public  boolean updateStatus(Integer status, Long id){
+        return dishMapper.updateStatus(status, id) > 0;
     }
 
     /**
