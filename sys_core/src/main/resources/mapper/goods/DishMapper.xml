@@ -88,7 +88,7 @@
         SELECT <include refid="All_Column_List"/>
         FROM dish
         WHERE id IN
-        <foreach collection="list" item="item" separator="," close="(" open=")">
+        <foreach collection="list" item="item" separator="," open="(" close=")">
             #{item}
         </foreach>
     </select>
