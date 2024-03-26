@@ -22,8 +22,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,10 +75,7 @@ public class DishController {
         for(DishDO dishDO : dishDOList){
             DishVO dishVO = new DishVO();
             BeanUtil.copyProperties(dishDO, dishVO);
-            String timeToStr = DateUtil.timeToStr(dishDO.getUpdateTime(), "yyyy-MM-dd HH:mm:ss");
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime localDateTime = LocalDateTime.parse(timeToStr, dateTimeFormatter);
-            dishVO.setUpdateTime(localDateTime);
+            dishVO.setUpdateTime(DateUtil.timeToStr(dishDO.getUpdateTime(), "yyyy-MM-dd HH:mm:ss"));
             resultList.add(dishVO);
         }
 

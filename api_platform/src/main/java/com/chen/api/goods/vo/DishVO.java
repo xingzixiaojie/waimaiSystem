@@ -7,7 +7,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class DishVO implements Serializable {
 
     /** 菜品最后修改时间, 格式：yyyy-MM-dd HH:mm:ss */
     @ApiModelProperty(required = true, value = "菜品最后修改时间, 格式：yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateTime;
+    private String updateTime;
 
     /** 分类名称 */
     @ApiModelProperty(required = true, value = "分类名称")

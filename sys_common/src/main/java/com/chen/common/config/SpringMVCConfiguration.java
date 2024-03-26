@@ -1,8 +1,8 @@
 package com.chen.common.config;
 
 import com.chen.common.interceptor.JwtTokenAdminInterceptor;
+import com.chen.common.interceptor.JwtTokenUserInterceptor;
 import com.chen.common.utils.LogUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -15,13 +15,21 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import javax.annotation.Resource;
+
 /**
  * SpringMVC配置
  */
 @Configuration
 public class SpringMVCConfiguration extends WebMvcConfigurationSupport {
 
-    @Autowired
+    /** User jwt令牌校验的拦截器 */
+    @Resource
+    private JwtTokenUserInterceptor jwtTokenUserInterceptor;
+
+
+     /** Admin jwt令牌校验的拦截器 */
+    @Resource
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
 
     /**
@@ -31,9 +39,15 @@ public class SpringMVCConfiguration extends WebMvcConfigurationSupport {
      */
     protected void addInterceptors(InterceptorRegistry registry) {
         LogUtil.printInfo("开始注册自定义拦截器...");
+
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
+
+        registry.addInterceptor(jwtTokenUserInterceptor)
+                .addPathPatterns("/user/**")
+                .excludePathPatterns("/user/user/login")
+                .excludePathPatterns("/user/shop/status");
     }
 
     /**
