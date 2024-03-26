@@ -64,7 +64,7 @@ public class SetmealController {
 
     @ApiOperation("6.1.2 新增套餐")
     @PostMapping
-    public Result create(SetmealPO po){
+    public Result create(@RequestBody SetmealPO po){
         SetmealBO setmealBO = new SetmealBO();
         BeanUtil.copyProperties(po, setmealBO);
         boolean flag = setmealService.insert(setmealBO);
@@ -77,7 +77,7 @@ public class SetmealController {
 
     @ApiOperation("6.1.3 修改套餐")
     @PutMapping
-    public Result update(SetmealPO po){
+    public Result update(@RequestBody SetmealPO po){
         SetmealBO setmealBO = new SetmealBO();
         BeanUtil.copyProperties(po, setmealBO);
         boolean flag = setmealService.update(setmealBO);

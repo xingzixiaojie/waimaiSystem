@@ -84,11 +84,6 @@ public class CategoryController {
         return Result.error("启用禁用失败");
     }
 
-    /**
-     * 根据类型查询分类
-     * @param type
-     * @return
-     */
     @GetMapping("/list")
     @ApiOperation("2.1.6 根据类型查询分类")
     public Result<List<CategoryDO>> list(Integer type){

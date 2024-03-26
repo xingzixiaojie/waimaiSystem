@@ -117,7 +117,7 @@ public class SetmealServiceImpl implements SetmealService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean deleteBatchByIds(List<Long> ids){
-        boolean executeSuccess = setmealDishService.deleteBatchBySetmealIds(ids);
+        boolean executeSuccess = setmealMapper.deleteBatchByIds(ids) > 0;
         if(executeSuccess){
             List<SetmealDishDO> setmealDishDOList = setmealDishService.listAll();
             if(CollUtil.isNotEmpty(setmealDishDOList)){

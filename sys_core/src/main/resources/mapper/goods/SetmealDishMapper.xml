@@ -9,7 +9,7 @@
 
     <!--  批量插入套餐菜品关系信息  -->
     <insert id="insertBatch" parameterType="com.chen.core.goods.entity.SetmealDishDO" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO setmeal_id (setmeal_id, dish_id, name, price, copies)
+        INSERT INTO setmeal_dish (setmeal_id, dish_id, name, price, copies)
         VALUES
             <foreach collection="list" item="item" separator=",">
                 (#{item.setmealId}, #{item.dishId}, #{item.name}, #{item.price}, #{item.copies})
