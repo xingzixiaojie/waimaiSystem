@@ -83,6 +83,16 @@
         WHERE name = #{name}
     </select>
 
+    <!--  根据ID集合批量查询菜品信息  -->
+    <select id="listByIds" resultType="com.chen.core.goods.entity.DishDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM dish
+        WHERE id IN
+        <foreach collection="list" item="item" separator="," close="(" open=")">
+            #{item}
+        </foreach>
+    </select>
+
     <!--  查询全部菜品信息  -->
     <select id="list" resultType="com.chen.core.goods.entity.DishDO">
         SELECT <include refid="All_Column_List"/>

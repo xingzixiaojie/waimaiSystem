@@ -67,6 +67,13 @@ public interface DishMapper {
     DishDO getByName(@Param("name") String name);
 
     /**
+     * 根据ID集合批量查询菜品信息
+     * @param list ID集合
+     * @return 菜品信息集合
+     */
+    List<DishDO> listByIds(@Param("list") List<Long> list);
+
+    /**
      * 查询全部菜品信息
      * @param name 菜品名称，支持模糊查询，查询全部填NULL
      * @param categoryId 菜品分类id，查询全部填NULL

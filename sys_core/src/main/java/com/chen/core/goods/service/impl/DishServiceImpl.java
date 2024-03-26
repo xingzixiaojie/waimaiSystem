@@ -209,6 +209,16 @@ public class DishServiceImpl implements DishService {
     }
 
     /**
+     * 根据ID集合批量查询菜品信息
+     * @param list ID集合
+     * @return 菜品信息集合
+     */
+    @Override
+    public List<DishDO> listByIds(List<Long> list){
+        return dishMapper.listByIds(list);
+    }
+
+    /**
      * 查询全部菜品信息
      * @param page 分页信息
      * @param name 菜品名称，支持模糊查询，查询全部填NULL
@@ -218,7 +228,9 @@ public class DishServiceImpl implements DishService {
      */
     @Override
     public PageInfo<DishDO> list(QueryPage page, String name, Long categoryId, Integer status){
-        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        if(page != null){
+            PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        }
         return new PageInfo<>(dishMapper.list(name, categoryId, status));
     }
 

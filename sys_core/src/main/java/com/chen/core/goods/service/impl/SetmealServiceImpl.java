@@ -174,7 +174,9 @@ public class SetmealServiceImpl implements SetmealService {
      */
     @Override
     public PageInfo<SetmealDO> list(QueryPage page, Long categoryId, String name, Integer status){
-        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        if(page != null){
+            PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        }
         return new PageInfo<>(setmealMapper.list(categoryId, name, status));
     }
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-@Api(tags = "5.1 店铺相关接口")
+@Api(tags = "10.2 店铺相关接口")
 @RestController(value = "UserShopController")
 @RequestMapping("/user/shop")
 public class ShopController {
@@ -19,7 +19,7 @@ public class ShopController {
     @Resource
     private RedisTemplate redisTemplate;
 
-    @ApiOperation("5.1.3 用户获取店铺的营业状态")
+    @ApiOperation("10.2.1 用户获取店铺的营业状态")
     @GetMapping("/status")
     public Result<Integer> getStatus(){
         Integer status = (Integer) redisTemplate.opsForValue().get(KEY);
