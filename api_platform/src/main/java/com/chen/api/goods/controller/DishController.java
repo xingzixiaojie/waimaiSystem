@@ -19,11 +19,13 @@ import com.chen.core.goods.service.DishService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Api(tags = "4.1 菜品相关接口")
 @RequestMapping("/admin/dish")
@@ -42,9 +44,15 @@ public class DishController {
     @Resource
     private DishFlavorService dishFlavorService;
 
+    /** redis */
+    @Resource
+    private RedisTemplate redisTemplate;
+
     @ApiOperation("4.1.1 新增菜品")
     @PostMapping
     public Result create(@RequestBody DishPO po){
+        String key = "dish_" + po.getCategoryId();
+        redisTemplate.delete(key);
         DishDO byName = dishService.getByName(po.getName());
         if(byName != null){
             return Result.error("菜品名称已存在");
@@ -105,6 +113,8 @@ public class DishController {
     @ApiOperation("4.1.3 菜品批量删除")
     @DeleteMapping
     public Result delete(@RequestParam List<Long> ids){
+        Set keys = redisTemplate.keys("dish_*");
+        redisTemplate.delete(keys);
         boolean flag = dishService.deleteBatch(ids);
         if (flag){
             return Result.success();
@@ -128,6 +138,8 @@ public class DishController {
     @ApiOperation("4.1.5 修改菜品")
     @PutMapping
     public Result update(@RequestBody DishPO po){
+        Set keys = redisTemplate.keys("dish_*");
+        redisTemplate.delete(keys);
         DishBO dishBO = new DishBO();
         BeanUtil.copyProperties(po, dishBO);
         dishBO.setFlavorList(po.getFlavors());
@@ -142,6 +154,8 @@ public class DishController {
     @ApiOperation("4.1.6 修改菜品售卖状态")
     @PostMapping("/status/{status}")
     public Result updateStatus(@PathVariable("status") Integer status, Long id){
+        Set keys = redisTemplate.keys("dish_*");
+        redisTemplate.delete(keys);
         boolean flag = dishService.updateStatus(status, id);
         if (flag){
             return Result.success();

@@ -2,6 +2,7 @@ package com.chen.api.user.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.chen.api.goods.vo.DishVO;
 import com.chen.common.result.Result;
 import com.chen.common.utils.DateUtil;
@@ -14,6 +15,7 @@ import com.chen.core.goods.service.DishService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +41,10 @@ public class DishController {
     @Resource
     private DishFlavorService dishFlavorService;
 
+    /** redis */
+    @Resource
+    private RedisTemplate redisTemplate;
+
 
     /**
      * 根据分类id查询菜品
@@ -49,38 +55,44 @@ public class DishController {
     @GetMapping("/list")
     @ApiOperation("10.4.1 根据分类id查询菜品")
     public Result<List<DishVO>> list(Long categoryId) {
+        String key = "dish_" + categoryId;
+        List<DishVO> resultRedisList = (List<DishVO>)redisTemplate.opsForValue().get(key);
 
-        PageInfo<DishDO> dishDOPageInfo = dishService.list(null, null, categoryId, 1);
-        List<DishDO> dishDOList = dishDOPageInfo.getList();
-        List<DishVO> resultList = new ArrayList<>();
-        for(DishDO dishDO : dishDOList){
-            DishVO dishVO = new DishVO();
-            BeanUtil.copyProperties(dishDO, dishVO);
-            dishVO.setUpdateTime(DateUtil.timeToStr(dishDO.getUpdateTime(), "yyyy-MM-dd HH:mm:ss"));
-            resultList.add(dishVO);
-        }
+        if(CollUtil.isNotEmpty(resultRedisList)){
+            return Result.success(resultRedisList);
+        }else {
+            PageInfo<DishDO> dishDOPageInfo = dishService.list(null, null, categoryId, 1);
+            List<DishDO> dishDOList = dishDOPageInfo.getList();
+            List<DishVO> resultList = new ArrayList<>();
+            for(DishDO dishDO : dishDOList){
+                DishVO dishVO = new DishVO();
+                BeanUtil.copyProperties(dishDO, dishVO);
+                dishVO.setUpdateTime(DateUtil.timeToStr(dishDO.getUpdateTime(), "yyyy-MM-dd HH:mm:ss"));
+                resultList.add(dishVO);
+            }
 
-        List<CategoryDO> categoryDOList = categoryService.listAll();
-        for(DishVO dishVO : resultList){
-            for(CategoryDO categoryDO : categoryDOList){
-                if(dishVO.getCategoryId().longValue() == categoryDO.getId().longValue()){
-                    dishVO.setCategoryName(categoryDO.getName());
+            List<CategoryDO> categoryDOList = categoryService.listAll();
+            for(DishVO dishVO : resultList){
+                for(CategoryDO categoryDO : categoryDOList){
+                    if(dishVO.getCategoryId().longValue() == categoryDO.getId().longValue()){
+                        dishVO.setCategoryName(categoryDO.getName());
+                    }
                 }
             }
-        }
 
-        List<DishFlavorDO> dishFlavorDOList = dishFlavorService.listAll();
-        for(DishVO dishVO : resultList){
-            List<DishFlavorDO> flavorDOList = new ArrayList<>();
-            for(DishFlavorDO dishFlavorDO : dishFlavorDOList){
-                if(dishVO.getId().longValue() == dishFlavorDO.getDishId().longValue()){
-                    flavorDOList.add(dishFlavorDO);
+            List<DishFlavorDO> dishFlavorDOList = dishFlavorService.listAll();
+            for(DishVO dishVO : resultList){
+                List<DishFlavorDO> flavorDOList = new ArrayList<>();
+                for(DishFlavorDO dishFlavorDO : dishFlavorDOList){
+                    if(dishVO.getId().longValue() == dishFlavorDO.getDishId().longValue()){
+                        flavorDOList.add(dishFlavorDO);
+                    }
                 }
+                dishVO.setFlavors(flavorDOList);
             }
-            dishVO.setFlavors(flavorDOList);
+            redisTemplate.opsForValue().set(key, resultList);
+            return Result.success(resultList);
         }
-
-        return Result.success(resultList);
     }
 
 }
