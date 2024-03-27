@@ -12,6 +12,7 @@ import com.chen.core.goods.service.SetmealService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,7 @@ public class SetmealController {
      */
     @GetMapping("/list")
     @ApiOperation("10.5.1 根据分类id查询套餐")
+    @Cacheable(cacheNames = "setmealCache", key = "#categoryId")
     public Result<List<SetmealDO>> list(Long categoryId) {
         PageInfo<SetmealDO> setmealDOPageInfo = setmealService.list(null, categoryId, null, 1);
         return Result.success(setmealDOPageInfo.getList());

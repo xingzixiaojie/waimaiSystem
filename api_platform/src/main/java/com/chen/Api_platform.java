@@ -3,6 +3,7 @@ package com.chen;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @EnableWebMvc  //springMVC
 @Configuration  //启用配置模式
 @EnableScheduling  //定时任务
+@EnableCaching  //开启缓存
 @EnableTransactionManagement //开启注解方式的事务管理
 @MapperScan("com.chen.core.*.mapper")  //扫描mapper
 @SpringBootApplication(scanBasePackages = {"com.chen"})

@@ -19,6 +19,7 @@ import com.chen.core.goods.service.SetmealService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -64,6 +65,7 @@ public class SetmealController {
 
     @ApiOperation("6.1.2 新增套餐")
     @PostMapping
+    @CacheEvict(cacheNames = "setmealCache", key = "#po.categoryId")
     public Result create(@RequestBody SetmealPO po){
         SetmealBO setmealBO = new SetmealBO();
         BeanUtil.copyProperties(po, setmealBO);
@@ -77,6 +79,7 @@ public class SetmealController {
 
     @ApiOperation("6.1.3 修改套餐")
     @PutMapping
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result update(@RequestBody SetmealPO po){
         SetmealBO setmealBO = new SetmealBO();
         BeanUtil.copyProperties(po, setmealBO);
@@ -117,6 +120,7 @@ public class SetmealController {
 
     @ApiOperation("6.1.5 批量删除套餐")
     @DeleteMapping
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result deleteBatch(@RequestParam List<Long> ids){
         boolean flag = setmealService.deleteBatchByIds(ids);
         if(flag){
@@ -128,6 +132,7 @@ public class SetmealController {
 
     @ApiOperation("6.1.6 套餐起售、停售")
     @PostMapping("/status/{status}")
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result updateStatus(@PathVariable("status") Integer status, Long id){
         boolean flag = setmealService.updateStatus(id, status);
         if(flag){
