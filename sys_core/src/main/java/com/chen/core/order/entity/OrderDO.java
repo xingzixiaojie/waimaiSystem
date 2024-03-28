@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 /** C端用户的订单数据 */
 @Data
-public class OrdersDO implements Serializable {
+public class OrderDO implements Serializable {
 
     /** 主键，自增 */
     private Long id;
@@ -35,7 +35,7 @@ public class OrdersDO implements Serializable {
     private Timestamp checkoutTime;
 
     /** 支付方式, 1：微信支付，2：支付宝支付 */
-    private Integer pay_method;
+    private Integer payMethod;
 
     /** 支付状态, 0：未支付，1：已支付，2：退款 */
     private Integer payStatus;
