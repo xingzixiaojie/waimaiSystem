@@ -2,4 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chen.core.address.mapper.AddressBookMapper">
 
+    <sql id="All_Column_List">
+        id, user_id, consignee, sex, phone,
+        province_code, province_name, city_code, city_name, district_code, district_name, detail, label, is_default
+    </sql>
+
+    <!--  条件查询所有地址信息  -->
+    <select id="list" resultType="com.chen.core.address.entity.AddressBookDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM address_book
+        <where>
+            <if test="userId != null and userId != '' ">
+                AND user_id = #{userId}
+            </if>
+            <if test="phone != null and phone != '' ">
+                AND phone = #{phone}
+            </if>
+            <if  test="isDefault != null">
+                AND is_default = #{isDefault}
+            </if>
+        </where>
+    </select>
+
+    <!--  新增地址信息  -->
+    <insert id="insert" parameterType="com.chen.core.address.entity.AddressBookDO" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO address_book (user_id, consignee, sex, phone,
+                                  province_code, province_name, city_code, city_name, district_code,
+                                  district_name, detail, label, is_default)
+        VALUES (#{userId}, #{consignee}, #{sex}, #{phone}, #{provinceCode}, #{provinceName}, #{cityCode}, #{cityName}, #{districtCode},
+                #{districtName}, #{detail}, #{label}, #{isDefault})
+    </insert>
+
+    <!--  根据id查询地址信息  -->
+    <select id="getById" parameterType="java.lang.Long" resultType="com.chen.core.address.entity.AddressBookDO">
+        SELECT <include refid="All_Column_List"/>
+        FROM address_book
+        WHERE id = #{id}
+    </select>
+
+    <!--  根据id修改地址信息  -->
+    <update id="update" parameterType="com.chen.core.address.entity.AddressBookDO">
+        UPDATE address_book
+        <set>
+            <if test="consignee != null and consignee != '' ">
+                consignee = #{consignee},
+            </if>
+            <if test="sex != null and sex != '' ">
+                sex = #{sex},
+            </if>
+            <if test="phone != null and phone != '' ">
+                phone = #{phone},
+            </if>
+            <if test="detail != null and detail != '' ">
+                detail = #{detail},
+            </if>
+            <if test="label != null and label != '' ">
+                label = #{label},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--  根据用户id修改 是否默认地址  -->
+    <update id="updateIsDefaultByUserId">
+        UPDATE address_book
+        SET is_default = #{isDefault}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--  根据id删除地址  -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM address_book
+        WHERE id = #{id}
+    </delete>
+
 </mapper>
